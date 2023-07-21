@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CocktailRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CocktailRepository::class)]
@@ -28,14 +30,22 @@ class Cocktail
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $shaker = null;
+    #[ORM\Column]
+    private ?bool $shaker = null;
 
     #[ORM\Column(length: 255)]
     private ?string $shakerimage = null;
 
     #[ORM\Column]
     private ?bool $alcool = null;
+
+    #[ORM\OneToMany(mappedBy: 'cocktail_id', targetEntity: Cl::class)]
+    private Collection $cls;
+
+    public function __construct()
+    {
+        $this->cls = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -102,12 +112,12 @@ class Cocktail
         return $this;
     }
 
-    public function getShaker(): ?string
+    public function isShaker(): ?bool
     {
         return $this->shaker;
     }
 
-    public function setShaker(?string $shaker): static
+    public function setShaker(bool $shaker): static
     {
         $this->shaker = $shaker;
 
@@ -137,4 +147,35 @@ class Cocktail
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Cl>
+     */
+    public function getCls(): Collection
+    {
+        return $this->cls;
+    }
+
+    public function addCl(Cl $cl): static
+    {
+        if (!$this->cls->contains($cl)) {
+            $this->cls->add($cl);
+            $cl->setCocktailId($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCl(Cl $cl): static
+    {
+        if ($this->cls->removeElement($cl)) {
+            // set the owning side to null (unless already changed)
+            if ($cl->getCocktailId() === $this) {
+                $cl->setCocktailId(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

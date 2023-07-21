@@ -37,13 +37,11 @@ function Cocktails(props) {
   {
       setRecords(cocktails.filter(f => 
       f.name.toLowerCase().includes(event.target.value) ||
-      f.ingredients.toLowerCase().includes(event.target.value) ||
-      f.shaker.toLowerCase().includes(event.target.value)
+      f.ingredients.toLowerCase().includes(event.target.value)
     ))
       setRecordsAlcool(cocktailsAlcool.filter(f => 
         f.name.toLowerCase().includes(event.target.value) ||
-        f.ingredients.toLowerCase().includes(event.target.value) ||
-        f.shaker.toLowerCase().includes(event.target.value)
+        f.ingredients.toLowerCase().includes(event.target.value)
     ))
   }
   return (

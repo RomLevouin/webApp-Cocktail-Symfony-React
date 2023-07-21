@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class ApiController extends AbstractController
 {
@@ -31,16 +32,25 @@ class ApiController extends AbstractController
             ->getQuery();
 
         $results = $query->getResult();
-
-        return $this->json($results, Response::HTTP_OK, []);
+ 
+        return $this->json($results, Response::HTTP_OK, [], [
+            ObjectNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($results) {
+                return $results->getId();
+            }
+        ]);
     }
 
     #[Route('/api/cocktail/{id}', name: 'api_cockails_detail', methods: ["HEAD", "GET"])]
-    public function cocktailDetail(String $id): JsonResponse
+    public function cocktailDetail(int $id): JsonResponse
     {
-        $cocktail_id = $this->cocktailRepository->find($id);
-
-        return $this->json($cocktail_id, Response::HTTP_OK, [$id]);
+        $cocktail_id = $this->entityManager->getRepository(Cocktail::class)->find($id);
+        $cl = $cocktail_id->getCls()->toArray();
+        
+        return $this->json($cocktail_id, Response::HTTP_OK, [$id], [
+            ObjectNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($cocktail_id) {
+                return $cocktail_id->getId();
+            }
+        ]);
     }
     
 }

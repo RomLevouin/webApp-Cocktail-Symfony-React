@@ -398,6 +398,7 @@ hr.solid {
 	font-size: 14px;
 	width: 50%;
 }
+
 .prepaDetail{
 	white-space: pre-line;
 }
@@ -409,23 +410,24 @@ hr.solid {
 	font-family: 'Bevan', cursive;
 }
 
+.all-prep{
+	display: flex;
+}
+
 #list-prep{
 	color: #B2A4ED;
 	font-size: 14px;
 	font-style: italic;
 	font-family: 'Bevan', cursive;
 	text-align: left;
-	margin-left: 20px;
-	margin-top: 20px;
+	/* margin-left: 20px;
+	margin-top: 20px; */
 }
 
 .shaker{
-	display: flex;
-	white-space: pre-line;
 	text-align: center;
 	width: 50%;
 	margin: 0 auto;
-	margin-top: 10px;
 }
 
 #shaker{
@@ -435,7 +437,14 @@ hr.solid {
 	margin-right: 20px;
 	margin-top: 20px;
 }
+
 .shaker img{
 	width: 70px;
 	height: 70px;
+}
+
+.shaker div{
+	display: flex;
+	margin-top: 30px;
+	width: 25%;
 }

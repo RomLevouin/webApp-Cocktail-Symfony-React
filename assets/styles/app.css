@@ -412,6 +412,7 @@ hr.solid {
 
 .all-prep{
 	display: flex;
+	margin-top: 15px;
 }
 
 #list-prep{
@@ -420,8 +421,6 @@ hr.solid {
 	font-style: italic;
 	font-family: 'Bevan', cursive;
 	text-align: left;
-	/* margin-left: 20px;
-	margin-top: 20px; */
 }
 
 .shaker{
@@ -447,4 +446,36 @@ hr.solid {
 	display: flex;
 	margin-top: 30px;
 	width: 25%;
+}
+
+
+#handle{
+	width: 33,33%;
+	display: flex;
+	justify-content: space-around;
+}
+
+#handle p{
+	color: #8D7CF6;
+	font-size: 16px;
+	font-family: 'Bevan', cursive;
+}
+
+#handle button{
+	width: 30px;
+	color: #8D7CF6;
+	background: none;
+	font-size: 30px;
+	border: none;
+	cursor: pointer;
+}
+
+#clvalue{
+	color: #B2A4ED;
+	font-size: 14px;
+	font-style: italic;
+	font-family: 'Bevan', cursive;
+	text-align: left;
+	margin-left: 30px;
+	margin-right: 10px;
 }
